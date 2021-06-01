@@ -5,7 +5,7 @@ NOTE: Any command here need to be usedin exactly inside the curriculum-gen-front
 
 ## Run application
 1. Install node version manager
-[nvm - node version manager](https://github.com/coreybutler/nvm-windows)
+* [nvm - node version manager](https://github.com/coreybutler/nvm-windows)
 2. Install Node version 14.15.3
 * nvm install 14.15.3
 3. See the Node installed versions
