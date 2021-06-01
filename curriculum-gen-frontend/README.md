@@ -2,7 +2,7 @@
 Curriculum generator by templates ordenated.
 
 NOTE: Any command here need to be usedin exactly inside the curriculum-gen-frontend. Take care to use this commands in another folder.
----
+
 ## Run application
 1. Install node version manager
 [nvm - node version manager](https://github.com/coreybutler/nvm-windows)
@@ -18,15 +18,22 @@ NOTE: Any command here need to be usedin exactly inside the curriculum-gen-front
 * npm install
 7. Run project
 * ng serve
----
+
+```
+Link to access first page of the application:
+http://localhost:4200/relatorio
+```
+
 ## Run db.json mockup
 1. Install json-server: npm install -g json-server
 2. Run mockup: json-server --watch db.json
 
-Obs: db.json is a file created to save an json object that emulate a backend query.
-
-In this project you can test using the following url: 
+```
+Link to access mockup:
 http://localhost:3000/pessoa
+```
 
-This is the result  
+Obs: db.json is a file created to save an json object that emulate a backend query. 
+
+Result  
 ![alt text](https://i.imgur.com/yd6GgPC.png "Pessoa list")
