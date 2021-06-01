@@ -1,2 +1,2 @@
-# curriculum-gen
-Curriculum generator by templates ordenated.
+## See
+[Frontend](https://github.com/luuishenriique/curriculum-gen/blob/release-0.0.0/curriculum-gen-frontend/README.md "")
