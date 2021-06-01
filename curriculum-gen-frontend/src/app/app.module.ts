@@ -3,7 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RelatorioComponent } from './relatorio/relatorio.component';
+import { RelatorioComponent } from './components/relatorio/relatorio.component';
+import { PessoaService } from './service/pessoa.service';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,7 @@ import { RelatorioComponent } from './relatorio/relatorio.component';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [PessoaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
