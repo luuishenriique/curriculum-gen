@@ -1,4 +1,4 @@
-export interface Pessoa{
+export interface Referencia{
     id: number;
     nome: string;
     dtNasc: Date;
