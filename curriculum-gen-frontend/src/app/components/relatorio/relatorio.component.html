@@ -1,9 +1,137 @@
-<div *ngFor="let pessoa of pessoaList">
-    ###############################################################
-    <p>Nome: {{pessoa.nome}}</p>
-    <p>Nasc: {{pessoa.dtNasc}}</p>
-    <p>Email: {{pessoa.email}}</p>
-    <p>Celular: {{pessoa.ddd}} {{pessoa.celular}}</p>
-    <p>Telefone: {{pessoa.ddd}} {{pessoa.telefone}}</p>
+<div class="corpo">
+    <form [formGroup]="curriculumForm" (ngSubmit)="teste(curriculumForm.value)">
+        <mat-form-field class="campo">
+            <mat-label>Nome</mat-label>
+            <input matInput type="text" placeholder="Nome" formControlName="nome">
+        </mat-form-field>
+        <mat-form-field class="campo">
+            <mat-label>Email</mat-label>
+            <input matInput type="text" placeholder="Email" formControlName="email">
+        </mat-form-field>
+        <mat-form-field class="campo">
+            <mat-label>Celular</mat-label>
+            <input matInput type="text" placeholder="Celular" formControlName="celular">
+        </mat-form-field>
+        <mat-form-field class="campo">
+            <mat-label>Telefone</mat-label>
+            <input matInput type="text" placeholder="Telefone" formControlName="telefone">
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="lastComponent">
+            <mat-label>Data de nascimento</mat-label>
+            <input matInput [matDatepicker]="dp3" disabled>
+            <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+            <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+        </mat-form-field>
+
+        <fieldset formGroupName="endereco" class="endereco">
+            <mat-form-field class="campo">
+                <mat-label>Cep</mat-label>
+                <input matInput type="text" placeholder="Cep" formControlName="cep">
+            </mat-form-field>
+            <mat-form-field class="campo">
+                <mat-label>UF</mat-label>
+                <input matInput type="text" placeholder="UF" formControlName="uf">
+            </mat-form-field>
+            <mat-form-field class="campo">
+                <mat-label>Cidade</mat-label>
+                <input matInput type="text" placeholder="Cidade" formControlName="cidade">
+            </mat-form-field>
+            <mat-form-field class="campo">
+                <mat-label>Bairro</mat-label>
+                <input matInput type="text" placeholder="Bairro" formControlName="bairro">
+            </mat-form-field>
+            <mat-form-field class="campo">
+                <mat-label>Rua</mat-label>
+                <input matInput type="text" placeholder="Rua" formControlName="rua">
+            </mat-form-field>
+            <mat-form-field class="campo">
+                <mat-label>Número</mat-label>
+                <input matInput type="text" placeholder="Número" formControlName="numero">
+            </mat-form-field>
+        </fieldset>
+
+        <fieldset formGroupName="redeSocial" class="redeSocial">
+            <mat-form-field class="campo">
+                <mat-label>Rede social</mat-label>
+                <input matInput type="text" placeholder="Digite sua rede social" formControlName="nome">
+            </mat-form-field>
+            <mat-form-field class="campo">
+                <mat-label>Link</mat-label>
+                <input matInput type="text" placeholder="Digite o endereço" formControlName="link">
+            </mat-form-field>
+        </fieldset>
+
+        <fieldset formGroupName="historicoProfissional">
+            <mat-form-field class="campo">
+                <mat-label>Empresa</mat-label>
+                <input matInput type="text" placeholder="Empresa que trabalhou" formControlName="empresa">
+            </mat-form-field>
+            <mat-form-field class="campo">
+                <mat-label>Cargo</mat-label>
+                <input matInput type="text" placeholder="Cargo ocupado" formControlName="cargo">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Selecione o período de trabalho</mat-label>
+                <mat-date-range-input [rangePicker]="picker1">
+                  <input matStartDate formControlName="dtInicio" placeholder="Data de início">
+                  <input matEndDate formControlName="dtFim" placeholder="Data de fim">
+                </mat-date-range-input>
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-date-range-picker #picker1></mat-date-range-picker>
+            </mat-form-field>
+
+            <fieldset formGroupName="referencia">
+                <mat-form-field class="campo">
+                    <mat-label>Referência</mat-label>
+                    <input matInput type="text" placeholder="Nome da pessoa" formControlName="nome">
+                </mat-form-field>
+                <mat-form-field class="campo">
+                    <mat-label>Email</mat-label>
+                    <input matInput type="text" placeholder="Email da pessoa" formControlName="email">
+                </mat-form-field>
+                <mat-form-field class="campo">
+                    <mat-label>Telefone</mat-label>
+                    <input matInput type="text" placeholder="Telefone de contato" formControlName="telefone">
+                </mat-form-field>
+            </fieldset>
+        </fieldset>
+
+        <fieldset formGroupName="educacao">
+            <mat-form-field class="campo">
+                <mat-label>Instituição</mat-label>
+                <input matInput type="text" placeholder="Instituição de ensino" formControlName="instituicao">
+            </mat-form-field>
+            <mat-form-field class="campo">
+                <mat-label>Curso</mat-label>
+                <input matInput type="text" placeholder="Curso que realizou" formControlName="curso">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Selecione o período de estudo</mat-label>
+                <mat-date-range-input [rangePicker]="picker2">
+                  <input matStartDate formControlName="dtInicio" placeholder="Data de início">
+                  <input matEndDate formControlName="dtFim" placeholder="Data de fim">
+                </mat-date-range-input>
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-date-range-picker #picker2></mat-date-range-picker>
+            </mat-form-field>
+
+            <fieldset formGroupName="tipo">
+                <mat-form-field class="campo">
+                    <mat-label>Nível</mat-label>
+                    <input matInput type="text" placeholder="Grau de escolaridade do curso" formControlName="nivel">
+                </mat-form-field>
+            </fieldset>
+        </fieldset>
+
+        <fieldset formGroupName="habilidade">
+            <label for="">Descrição: </label>
+            <input type="text" formControlName="descricao">
+
+            <fieldset formGroupName="nivelHabilidade">
+                <label for="">Nível: </label>
+                <input type="text" formControlName="nivel">
+            </fieldset>
+        </fieldset>
+        <button type="submit" [disabled]="curriculumForm.invalid">Gerar curriculum</button>
+    </form>
 </div>
-    ###############################################################
