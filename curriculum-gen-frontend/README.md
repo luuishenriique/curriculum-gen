@@ -3,7 +3,7 @@ Curriculum generator by templates ordenated.
 
 NOTE: Any command here need to be usedin exactly inside the curriculum-gen-frontend. Take care to use this commands in another folder.
 
-##API's:
+## API's:
 1. Angular material 11.2.12
 2. Angular cdk 11.2.12
 3. Angular animation 11.2.12
@@ -18,10 +18,18 @@ NOTE: Any command here need to be usedin exactly inside the curriculum-gen-front
 4. Select de Node version you want to use
 * nvm use 14.15.3
 5. Install Angular version
-* npm install -g @angular/cli@11.0.9
+* npm install -g @angular/cli@11.2.12
 6. Install npm dependencies
 * npm install
-7. Run project
+7. Install Angular material 11.2.12
+* npm i @angular/material@11.2.12
+8. Install Angular cdk 11.2.12
+* npm i @angular/cdk@11.2.12
+9. Install Angular animations 11.2.12
+* npm i @angular/animations@11.2.12
+10. Configure Angular material dependencies
+* ng add @angular/material@11.2.12
+11. Run project
 * ng serve
 
 ```
