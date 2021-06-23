@@ -18,7 +18,7 @@
         </mat-form-field>
         <mat-form-field appearance="fill" class="lastComponent">
             <mat-label>Data de nascimento</mat-label>
-            <input matInput [matDatepicker]="dp3" disabled>
+            <input matInput [matDatepicker]="dp3" formControlName="dtNasc" [disabled]="true" placeholder="Data de Nascimento">
             <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
             <mat-datepicker #dp3 disabled="false"></mat-datepicker>
         </mat-form-field>
@@ -73,11 +73,11 @@
             <mat-form-field appearance="fill">
                 <mat-label>Selecione o período de trabalho</mat-label>
                 <mat-date-range-input [rangePicker]="picker1">
-                  <input matStartDate formControlName="dtInicio" placeholder="Data de início">
-                  <input matEndDate formControlName="dtFim" placeholder="Data de fim">
+                    <input matStartDate formControlName="dtInicio" [disabled]="true" placeholder="Data de início">
+                    <input matEndDate formControlName="dtFim" [disabled]="true" placeholder="Data de fim">
                 </mat-date-range-input>
                 <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                <mat-date-range-picker #picker1></mat-date-range-picker>
+                <mat-date-range-picker #picker1 disabled="false"></mat-date-range-picker>
             </mat-form-field>
 
             <fieldset formGroupName="referencia">
@@ -90,8 +90,8 @@
                     <input matInput type="text" placeholder="Email da pessoa" formControlName="email">
                 </mat-form-field>
                 <mat-form-field class="campo">
-                    <mat-label>Telefone</mat-label>
-                    <input matInput type="text" placeholder="Telefone de contato" formControlName="telefone">
+                    <mat-label>Celular</mat-label>
+                    <input matInput type="text" placeholder="Telefone de contato" formControlName="celular">
                 </mat-form-field>
             </fieldset>
         </fieldset>
@@ -108,30 +108,39 @@
             <mat-form-field appearance="fill">
                 <mat-label>Selecione o período de estudo</mat-label>
                 <mat-date-range-input [rangePicker]="picker2">
-                  <input matStartDate formControlName="dtInicio" placeholder="Data de início">
-                  <input matEndDate formControlName="dtFim" placeholder="Data de fim">
+                    <input matStartDate formControlName="dtInicio" [disabled]="true" placeholder="Data de início">
+                    <input matEndDate formControlName="dtFim" [disabled]="true" placeholder="Data de fim">
                 </mat-date-range-input>
                 <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                <mat-date-range-picker #picker2></mat-date-range-picker>
+                <mat-date-range-picker #picker2 disabled="false"></mat-date-range-picker>
             </mat-form-field>
 
-            <fieldset formGroupName="tipo">
-                <mat-form-field class="campo">
-                    <mat-label>Nível</mat-label>
-                    <input matInput type="text" placeholder="Grau de escolaridade do curso" formControlName="nivel">
-                </mat-form-field>
-            </fieldset>
+            <mat-form-field class="campo" >
+                <mat-label>Nível</mat-label>
+                <mat-select formGroupName="tipo">
+                    <mat-option *ngFor="let tipo of tipoList" [value]="tipo">
+                        {{tipo.descricao}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
         </fieldset>
 
         <fieldset formGroupName="habilidade">
-            <label for="">Descrição: </label>
-            <input type="text" formControlName="descricao">
+            <mat-form-field >
+                <mat-label>Habilidade</mat-label>
+                <input matInput type="text" placeholder="Conhecimento" formControlName="descricao">
+            </mat-form-field>
 
-            <fieldset formGroupName="nivelHabilidade">
-                <label for="">Nível: </label>
-                <input type="text" formControlName="nivel">
-            </fieldset>
+            <mat-form-field >
+                <mat-label>Nível</mat-label>
+                <mat-select formGroupName="nivelHabilidade">
+                    <mat-option *ngFor="let nivelHabilidade of nivelHabilidadeList" [value]="nivelHabilidade">
+                        {{nivelHabilidade.nivel}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
         </fieldset>
-        <button type="submit" [disabled]="curriculumForm.invalid">Gerar curriculum</button>
+
+        <button type="submit" [disabled]="false">Gerar curriculum</button>
     </form>
 </div>
