@@ -35,9 +35,8 @@ export class RelatorioComponent implements OnInit {
     nome: 'Henrique Martins',
     dtNasc: new Date('07/09/1989'),
     email: 'henrique_rr_martins@hotmail.com',
-    ddd: '81',
-    celular: 'x xxxx-xxxx',
-    telefone: 'xxxx-xxxx',
+    celular: '',
+    telefone: '',
     endereco: {
       id: 1,
       cep: '54783-010',
@@ -62,8 +61,7 @@ export class RelatorioComponent implements OnInit {
         id: 1,
         nome: 'Felipe',
         email: 'f@tascom.com.br',
-        ddd: '81',
-        celular: 'x xxxx-xxxx'
+        celular: ''
       }
     },
     educacao: {

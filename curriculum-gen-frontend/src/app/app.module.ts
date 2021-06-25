@@ -15,7 +15,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
+import { IConfig, NgxMaskModule } from 'ngx-mask';
 
+const maskConfig: Partial<IConfig> = {
+  validation: false,
+};
   
 @NgModule({
   declarations: [
@@ -34,7 +38,8 @@ import {MatSelectModule} from '@angular/material/select';
     MatFormFieldModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSelectModule
+    MatSelectModule,
+    NgxMaskModule.forRoot(maskConfig)
   ],
   providers: [
     PessoaService
