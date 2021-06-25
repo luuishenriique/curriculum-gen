@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormControlName, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormControlName, FormGroup, Validators } from '@angular/forms';
 import { PessoaService } from 'src/app/service/pessoa.service';
 
 @Component({
@@ -88,60 +88,84 @@ export class RelatorioComponent implements OnInit {
   }
 
   public curriculumForm: FormGroup = this.formBuilder.group({
-    nome: this.pessoa.nome,
-    dtNasc: this.pessoa.dtNasc,
-    email: this.pessoa.email,
-    ddd: this.pessoa.ddd,
-    celular: this.pessoa.celular,
-    telefone: this.pessoa.telefone,
+    nome: new FormControl(),
+    dtNasc: new FormControl(),
+    email: new FormControl(),
+    ddd: new FormControl(),
+    celular: new FormControl(),
+    telefone: new FormControl(),
     endereco: this.formBuilder.group({
-      cep: this.pessoa.endereco.cep,
-      uf: this.pessoa.endereco.uf,
-      cidade: this.pessoa.endereco.cidade,
-      bairro: this.pessoa.endereco.bairro,
-      rua: this.pessoa.endereco.rua,
-      numero: this.pessoa.endereco.numero
+      cep: new FormControl(),
+      uf: new FormControl(),
+      cidade: new FormControl(),
+      bairro: new FormControl(),
+      rua: new FormControl(),
+      numero: new FormControl(),
     }),
     redeSocial: this.formBuilder.group({
-      nome: this.pessoa.redeSocial.nome,
-      link: this.pessoa.redeSocial.link
+      nome: new FormControl(),
+      link: new FormControl(),
     }),
     historicoProfissional: this.formBuilder.group({
-      empresa: this.pessoa.historicoProfissional.empresa,
-      cargo: this.pessoa.historicoProfissional.cargo,
-      dtInicio: this.pessoa.historicoProfissional.dtInicio,
-      dtFim: this.pessoa.historicoProfissional.dtFim,
+      empresa: new FormControl(),
+      cargo: new FormControl(),
+      dtInicio: new FormControl(),
+      dtFim: new FormControl(),
 
       referencia: this.formBuilder.group({
-        nome: this.pessoa.historicoProfissional.referencia.nome,
-        email: this.pessoa.historicoProfissional.referencia.email,
-        celular: this.pessoa.historicoProfissional.referencia.celular
+        nome: new FormControl(),
+        email: new FormControl(),
+        celular: new FormControl(),
       })
     }),
     educacao: this.formBuilder.group({
-      instituicao: this.pessoa.educacao.instituicao,
-      curso: this.pessoa.educacao.curso,
-      dtInicio: this.pessoa.educacao.dtInicio,
-      dtFim: this.pessoa.educacao.dtFim,
+      instituicao: new FormControl(),
+      curso: new FormControl(),
+      dtInicio: new FormControl(),
+      dtFim: new FormControl(),
       tipo: this.formBuilder.group({
-        id: this.pessoa.educacao.tipo.id,
-        descricao: this.pessoa.educacao.tipo.descricao
+        id: new FormControl(),
+        descricao: new FormControl(),
       })
     }),
     habilidade: this.formBuilder.group({
       descricao: new FormControl(),
       nivelHabilidade: this.formBuilder.group({
-        id: this.pessoa.habilidade.nivelHabilidade.id,
-        nivel: this.pessoa.habilidade.nivelHabilidade.nivel
+        id: new FormControl(),
+        nivel: new FormControl(),
       })
     })
   });
 
   ngOnInit(): void {
+    this.startFormValues();
     console.log(this.curriculumForm.getRawValue());
   }
 
   teste(teste: any): void {
     console.log(teste);
+  }
+
+  private startFormValues(): void{
+    this.curriculumForm.patchValue(this.pessoa);
+  }
+
+  public selectTipo(event: any){
+    console.log(event)
+    const id = event.value;
+    for(let tipo of this.tipoList){
+      if(tipo.id == id)
+        this.curriculumForm.get('educacao')?.get('tipo')?.patchValue(tipo);
+    }
+  }
+
+  public selectNivelHabilidade(event: any){
+    console.log(event)
+    const id = event.value;
+    for(let nivelHabilidade of this.nivelHabilidadeList){
+      if(nivelHabilidade.id == id){
+        this.curriculumForm.get('habilidade')?.get('nivelHabilidade')?.patchValue(nivelHabilidade);
+      }
+    }
   }
 }

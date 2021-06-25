@@ -114,11 +114,10 @@
                 <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                 <mat-date-range-picker #picker2 disabled="false"></mat-date-range-picker>
             </mat-form-field>
-
-            <mat-form-field class="campo" >
+            <mat-form-field formGroupName="tipo" class="campo" >
                 <mat-label>Nível</mat-label>
-                <mat-select formGroupName="tipo">
-                    <mat-option *ngFor="let tipo of tipoList" [value]="tipo">
+                <mat-select formControlName="id" (selectionChange)="selectTipo($event)">
+                    <mat-option  *ngFor="let tipo of tipoList" [value]="tipo.id">
                         {{tipo.descricao}}
                     </mat-option>
                 </mat-select>
@@ -131,10 +130,10 @@
                 <input matInput type="text" placeholder="Conhecimento" formControlName="descricao">
             </mat-form-field>
 
-            <mat-form-field >
+            <mat-form-field formGroupName="nivelHabilidade" class="campo" >
                 <mat-label>Nível</mat-label>
-                <mat-select formGroupName="nivelHabilidade">
-                    <mat-option *ngFor="let nivelHabilidade of nivelHabilidadeList" [value]="nivelHabilidade">
+                <mat-select formControlName="id" (selectionChange)="selectNivelHabilidade($event)">
+                    <mat-option *ngFor="let nivelHabilidade of nivelHabilidadeList" [value]="nivelHabilidade.id">
                         {{nivelHabilidade.nivel}}
                     </mat-option>
                 </mat-select>

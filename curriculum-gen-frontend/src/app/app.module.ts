@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { RelatorioComponent } from './components/relatorio/relatorio.component';
 import { PessoaService } from './service/pessoa.service';
 import { ReferenciaComponent } from './components/referencia/referencia.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
@@ -26,6 +26,7 @@ import {MatSelectModule} from '@angular/material/select';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatInputModule,
