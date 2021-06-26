@@ -16,7 +16,6 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
 import { IConfig, NgxMaskModule } from 'ngx-mask';
-import { HabilidadesComponent } from './components/relatorio/habilidades/habilidades.component';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -26,8 +25,7 @@ const maskConfig: Partial<IConfig> = {
   declarations: [
     AppComponent,
     RelatorioComponent,
-    ReferenciaComponent,
-    HabilidadesComponent
+    ReferenciaComponent
   ],
   imports: [
     BrowserModule,
