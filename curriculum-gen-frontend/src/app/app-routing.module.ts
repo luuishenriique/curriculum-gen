@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { ReferenciaComponent } from './components/referencia/referencia.component';
+import { RouterModule, Routes } from '@angular/router';
 import { RelatorioComponent } from './components/relatorio/relatorio.component';
 
 const routes: Routes = [
-  {path: 'relatorio', component: RelatorioComponent},
-  {path: 'referencia', component: ReferenciaComponent}
+  {path: '', component: RelatorioComponent}
 ];
 
 @NgModule({
