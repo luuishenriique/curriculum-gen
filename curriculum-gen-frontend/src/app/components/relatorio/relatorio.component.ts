@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormControlName, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormControlName, FormGroup, Validators } from '@angular/forms';
 import { PessoaService } from 'src/app/service/pessoa.service';
 
 @Component({
@@ -28,7 +28,7 @@ export class RelatorioComponent implements OnInit {
   constructor(
     private pessoaService: PessoaService,
     private formBuilder: FormBuilder,
-    ) { }
+  ) { }
 
   pessoa = {
     id: 1,
@@ -46,43 +46,67 @@ export class RelatorioComponent implements OnInit {
       rua: 'Est. Aldeia',
       numero: '11971'
     },
-    redeSocial: {
-      id: 1,
-      nome: 'Linkedin',
-      link: 'https://www.linkedin.com/in/henrique-martins-450643119/'
-    },
-    historicoProfissional: {
-      id: 1,
-      empresa: 'Tascom',
-      cargo: 'Desenvolvedor',
-      dtInicio: new Date('11/23/2020'),
-      dtFim: new Date('05/17/2021'),
-      referencia: {
+    redesSociais: [
+      {
         id: 1,
-        nome: 'Felipe',
-        email: 'f@tascom.com.br',
-        celular: ''
+        nome: 'Linkedin',
+        link: 'https://www.linkedin.com/in/henrique-martins-450643119/'
       }
-    },
-    educacao: {
-      id: 1,
-      instituicao: 'UNIS-MG',
-      curso: 'Analise e desenvolvimento de sistemas',
-      dtInicio: new Date('02/02/2015'),
-      dtFim: new Date('08/10/2018'),
-      tipo: {
-        id: 5,
-        descricao: 'Graduação'
+    ],
+    empregos: [
+      {
+        id: 1,
+        empresa: 'Tascom',
+        cargo: 'Desenvolvedor',
+        dtInicio: new Date('11/23/2020'),
+        dtFim: new Date('05/17/2021'),
+        referencia: {
+          id: 1,
+          nome: 'Felipe',
+          email: 'f@tascom.com.br',
+          celular: ''
+        }
       }
-    },
-    habilidade: {
-      id: 1,
-      descricao: 'JavaScript',
-      nivelHabilidade: {
+    ],
+    cursos: [
+      {
+        id: 1,
+        instituicao: 'UNIS-MG',
+        curso: 'Analise e desenvolvimento de sistemas',
+        dtInicio: new Date('02/02/2015'),
+        dtFim: new Date('08/10/2018'),
+        tipo: {
+          id: 5,
+          descricao: 'Graduação'
+        }
+      }
+    ],
+    habilidades: [
+      {
+        id: 1,
+        descricao: 'JavaScript',
+        nivelHabilidade: {
+          id: 2,
+          nivel: 'Intermediário'
+        }
+      },
+      {
         id: 2,
-        nivel: 'Intermediário'
+        descricao: 'Java',
+        nivelHabilidade: {
+          id: 2,
+          nivel: 'Intermediário'
+        }
+      },
+      {
+        id: 3,
+        descricao: 'Angular',
+        nivelHabilidade: {
+          id: 2,
+          nivel: 'Intermediário'
+        }
       }
-    }
+    ]
   }
 
   public curriculumForm: FormGroup = this.formBuilder.group({
@@ -100,11 +124,107 @@ export class RelatorioComponent implements OnInit {
       rua: new FormControl(),
       numero: new FormControl(),
     }),
-    redeSocial: this.formBuilder.group({
-      nome: new FormControl(),
-      link: new FormControl(),
-    }),
-    historicoProfissional: this.formBuilder.group({
+    redesSociais: this.formBuilder.array([]),
+    empregos: this.formBuilder.array([]),
+    cursos: this.formBuilder.array([]),
+    habilidades: this.formBuilder.array([])
+  });
+
+  //Criar Gets dos FormArrays
+  get habilidades(): FormArray {
+    return this.curriculumForm.get('habilidades') as FormArray;
+  }
+
+  get cursos(): FormArray {
+    return this.curriculumForm.get('cursos') as FormArray;
+  }
+
+  get empregos(): FormArray {
+    return this.curriculumForm.get('empregos') as FormArray;
+  }
+
+  get redesSociais(): FormArray {
+    return this.curriculumForm.get('redesSociais') as FormArray;
+  }
+
+  //Starta valores iniciais do form baseado no objeto recebido do service
+  ngOnInit(): void {
+    this.startFormValues();
+  }
+
+  //Método de submit do relatório
+  onSubmit(teste: any): void {
+    console.log(this.curriculumForm);
+  }
+
+  //Prepara os componentes e recebe valores do objeto
+  private startFormValues(): void {
+    this.setHabilidade();
+    this.setCurso();
+    this.setEmprego();
+    this.setRedeSocial();
+    this.curriculumForm.patchValue(this.pessoa);
+  }
+
+  private setHabilidade() {
+    const qtd = this.pessoa.habilidades.length;
+
+    for (let i = 0; i < qtd; i++) {
+      this.addHabilidade();
+    }
+  }
+
+  private setCurso() {
+    const qtd = this.pessoa.cursos.length;
+
+    for (let i = 0; i < qtd; i++) {
+      this.addCurso();
+    }
+  }
+
+  private setEmprego(){
+    const qtd = this.pessoa.empregos.length;
+
+    for(let i = 0; i < qtd; i++){
+      this.addEmprego();
+    }
+  }
+
+  private setRedeSocial(){
+    const qtd = this.pessoa.redesSociais.length;
+
+    for(let i = 0; i < qtd; i++){
+      this.addRedeSocial();
+    }
+  }
+
+  //Cria FormGroups no FormArrays
+  newHabilidade(): FormGroup {
+    return this.formBuilder.group({
+      descricao: new FormControl(),
+      nivelHabilidade: this.formBuilder.group({
+        id: new FormControl(),
+        nivel: new FormControl()
+      })
+    });
+  }
+
+  newCurso(): FormGroup {
+    return this.formBuilder.group({
+      id: new FormControl(),
+      instituicao: new FormControl(),
+      curso: new FormControl(),
+      dtInicio: new FormControl(),
+      dtFim: new FormControl(),
+      tipo: this.formBuilder.group({
+        id: new FormControl(),
+        descricao: new FormControl(),
+      })
+    });
+  }
+
+  newEmprego(): FormGroup{
+    return this.formBuilder.group({
       empresa: new FormControl(),
       cargo: new FormControl(),
       dtInicio: new FormControl(),
@@ -115,55 +235,46 @@ export class RelatorioComponent implements OnInit {
         email: new FormControl(),
         celular: new FormControl(),
       })
-    }),
-    educacao: this.formBuilder.group({
-      instituicao: new FormControl(),
-      curso: new FormControl(),
-      dtInicio: new FormControl(),
-      dtFim: new FormControl(),
-      tipo: this.formBuilder.group({
-        id: new FormControl(),
-        descricao: new FormControl(),
-      })
-    }),
-    habilidade: this.formBuilder.group({
-      descricao: new FormControl(),
-      nivelHabilidade: this.formBuilder.group({
-        id: new FormControl(),
-        nivel: new FormControl(),
-      })
-    })
-  });
-
-  ngOnInit(): void {
-    this.startFormValues();
-    console.log(this.curriculumForm.getRawValue());
+    });
   }
 
-  teste(teste: any): void {
-    console.log(teste);
+  newRedeSocial(): FormGroup{
+    return this.formBuilder.group({
+      nome: new FormControl(),
+      link: new FormControl(),
+    });
   }
 
-  private startFormValues(): void{
-    this.curriculumForm.patchValue(this.pessoa);
+  addHabilidade() {
+    this.habilidades.push(this.newHabilidade());
   }
 
-  public selectTipo(event: any){
-    console.log(event)
-    const id = event.value;
-    for(let tipo of this.tipoList){
-      if(tipo.id == id)
-        this.curriculumForm.get('educacao')?.get('tipo')?.patchValue(tipo);
-    }
+  addCurso() {
+    this.cursos.push(this.newCurso());
   }
 
-  public selectNivelHabilidade(event: any){
-    console.log(event)
-    const id = event.value;
-    for(let nivelHabilidade of this.nivelHabilidadeList){
-      if(nivelHabilidade.id == id){
-        this.curriculumForm.get('habilidade')?.get('nivelHabilidade')?.patchValue(nivelHabilidade);
-      }
-    }
+  addEmprego(){
+    this.empregos.push(this.newEmprego());
+  }
+
+  addRedeSocial(){
+    this.redesSociais.push(this.newRedeSocial());
+  }
+
+  //Delete FormGroups of FormArrays
+  deleteHabilidade(habilidadeIndex: number) {
+    this.habilidades.removeAt(habilidadeIndex);
+  }
+
+  deleteCurso(cursoIndex: number) {
+    this.cursos.removeAt(cursoIndex);
+  }
+
+  deleteEmprego(empregoIndex: number){
+    this.empregos.removeAt(empregoIndex);
+  }
+
+  deleteRedeSocial(redeSocialIndex: number){
+    this.redesSociais.removeAt(redeSocialIndex);
   }
 }
