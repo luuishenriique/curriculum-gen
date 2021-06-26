@@ -13,6 +13,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RelatorioComponent } from './components/relatorio/relatorio.component';
 import { PessoaService } from './service/pessoa.service';
+import { HabilidadesComponent } from './components/relatorio/habilidades/habilidades.component';
 
 
 const maskConfig: Partial<IConfig> = {
@@ -22,7 +23,8 @@ const maskConfig: Partial<IConfig> = {
 @NgModule({
   declarations: [
     AppComponent,
-    RelatorioComponent
+    RelatorioComponent,
+    HabilidadesComponent
   ],
   imports: [
     BrowserModule,
