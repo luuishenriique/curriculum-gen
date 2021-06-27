@@ -9,16 +9,6 @@ import { PessoaService } from 'src/app/service/pessoa.service';
 })
 export class RelatorioComponent implements OnInit {
 
-  tipoList: any = [
-    { id: 0, descricao: 'curso' },
-    { id: 1, descricao: 'certificação' },
-    { id: 2, descricao: 'profissionalizante' },
-    { id: 3, descricao: 'técnico' },
-    { id: 4, descricao: 'graduação' },
-    { id: 5, descricao: 'pós-graduação' },
-    { id: 6, descricao: 'mestrado' }
-  ]
-
   constructor(
     private pessoaService: PessoaService,
     private formBuilder: FormBuilder,
@@ -145,12 +135,8 @@ export class RelatorioComponent implements OnInit {
   ngOnInit(): void {
     this.startFormValues();
 
+    //Sempre que o valor do form mudar printa o form
     this.curriculumForm.valueChanges.subscribe(form => console.log(form));
-  }
-
-  //Método de submit do relatório
-  onSubmit(teste: any): void {
-    console.log(this.curriculumForm);
   }
 
   //Prepara os componentes e recebe valores do objeto
@@ -161,6 +147,9 @@ export class RelatorioComponent implements OnInit {
     this.setRedeSocial();
     this.curriculumForm.patchValue(this.pessoa);
   }
+
+  //Método de submit do relatório
+  onSubmit(teste: any): void {}
 
   private setHabilidade() {
     const qtd = this.pessoa.habilidades.length;
@@ -255,11 +244,6 @@ export class RelatorioComponent implements OnInit {
 
   addRedeSocial(){
     this.redesSociais.push(this.newRedeSocial());
-  }
-
-  //Delete FormGroups of FormArrays
-  deleteCurso(cursoIndex: number) {
-    this.cursos.removeAt(cursoIndex);
   }
 
   deleteEmprego(empregoIndex: number){

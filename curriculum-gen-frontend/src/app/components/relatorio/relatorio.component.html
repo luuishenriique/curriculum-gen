@@ -118,46 +118,8 @@
                 <mat-icon class="add-course-btn">add</mat-icon>
             </button>
         </div>
-
-        <div formArrayName="cursos" class="lista">
-            <div *ngFor="let curso of cursos.controls;let i = index" class="lista">
-                <fieldset [formGroupName]="i">
-                    <mat-form-field class="campo">
-                        <mat-label>Instituição</mat-label>
-                        <input matInput type="text" placeholder="Instituição de ensino" formControlName="instituicao">
-                    </mat-form-field>
-                    <mat-form-field class="campo">
-                        <mat-label>Curso</mat-label>
-                        <input matInput type="text" placeholder="Curso que realizou" formControlName="curso">
-                    </mat-form-field>
-                    <mat-form-field >
-                        <mat-label>Selecione o período de estudo</mat-label>
-                        <mat-date-range-input [rangePicker]="picker2">
-                            <input matStartDate formControlName="dtInicio" [disabled]="true"
-                                placeholder="Data de início">
-                            <input matEndDate formControlName="dtFim" [disabled]="true" placeholder="Data de fim">
-                        </mat-date-range-input>
-                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                        <mat-date-range-picker #picker2 disabled="false"></mat-date-range-picker>
-                    </mat-form-field>
-                    <mat-form-field formGroupName="tipo" class="campo">
-                        <mat-label>Nível</mat-label>
-                        <mat-select formControlName="id">
-                            <!--(selectionChange)="selectTipo($event)"-->
-                            <mat-option *ngFor="let tipo of tipoList" [value]="tipo.id">
-                                {{tipo.descricao}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                    <mat-icon class="delete-btn" (click)="deleteCurso(i)">
-                        delete_forever
-                    </mat-icon>
-                </fieldset>
-            </div>
-            <button mat-mini-fab (click)="addCurso()">
-                <mat-icon class="add-course-btn">add</mat-icon>
-            </button>
-        </div>
+        
+        <app-cursos [curriculumForm]="curriculumForm"></app-cursos>
 
         <app-habilidades [curriculumForm]="curriculumForm"></app-habilidades>
 

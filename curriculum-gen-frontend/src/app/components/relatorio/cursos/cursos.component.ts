@@ -48,4 +48,18 @@ export class CursosComponent implements OnInit {
   addCurso(){
     this.cursos.push(this.newCurso());
   }
+
+  deleteCurso(cursoInidex: number){
+    this.cursos.removeAt(cursoInidex);
+  }
+
+  selectTipo(event: any, formGroupPosition: number){
+    const id = event.value;
+
+    for(let tipo of this.tipoList) {       
+      if(tipo.id == id){
+        this.cursos.at(formGroupPosition).get('tipo')?.patchValue(tipo);
+      }
+    }
+  }
 }

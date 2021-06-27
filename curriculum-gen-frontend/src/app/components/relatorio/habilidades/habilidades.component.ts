@@ -44,10 +44,10 @@ export class HabilidadesComponent implements OnInit {
     this.habilidades.removeAt(habilidadeIndex);
   }
 
-  selectNivelHabilidade(event: any, formGroupPosition: number){
+  selectNivelHabilidade(event: any, formGroupPosition: number) {
     const id = event.value;
 
-    for(let nivelHabilidade of this.nivelHabilidadeList){
+    for(let nivelHabilidade of this.nivelHabilidadeList) {
 
       if(nivelHabilidade.id == id){
         this.habilidades.at(formGroupPosition).get('nivelHabilidade')?.patchValue(nivelHabilidade);
