@@ -14,6 +14,7 @@ import { AppComponent } from './app.component';
 import { RelatorioComponent } from './components/relatorio/relatorio.component';
 import { PessoaService } from './service/pessoa.service';
 import { HabilidadesComponent } from './components/relatorio/habilidades/habilidades.component';
+import { CursosComponent } from './components/relatorio/cursos/cursos.component';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -23,7 +24,8 @@ const maskConfig: Partial<IConfig> = {
   declarations: [
     AppComponent,
     RelatorioComponent,
-    HabilidadesComponent
+    HabilidadesComponent,
+    CursosComponent
   ],
   imports: [
     BrowserModule,
