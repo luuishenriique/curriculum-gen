@@ -214,7 +214,7 @@ export class RelatorioComponent implements OnInit {
       dtFim: new FormControl(),
       tipo: this.formBuilder.group({
         id: new FormControl(),
-        descricao: new FormControl(),
+        descricao: new FormControl()
       })
     });
   }

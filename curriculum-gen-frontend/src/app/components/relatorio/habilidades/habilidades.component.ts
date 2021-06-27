@@ -21,7 +21,7 @@ export class HabilidadesComponent implements OnInit {
   }
 
   get habilidades(): FormArray {
-    return this.curriculumForm?.controls['habilidades'] as FormArray;
+    return this.curriculumForm.controls['habilidades'] as FormArray;
   }
 
   ngOnInit(): void {}
