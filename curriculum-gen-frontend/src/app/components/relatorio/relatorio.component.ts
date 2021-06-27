@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormControl, FormControlName, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { PessoaService } from 'src/app/service/pessoa.service';
 
 @Component({
@@ -10,19 +10,13 @@ import { PessoaService } from 'src/app/service/pessoa.service';
 export class RelatorioComponent implements OnInit {
 
   tipoList: any = [
-    { id: 1, descricao: 'curso' },
-    { id: 2, descricao: 'certificação' },
-    { id: 3, descricao: 'profissionalizante' },
-    { id: 4, descricao: 'técnico' },
-    { id: 5, descricao: 'graduação' },
-    { id: 6, descricao: 'pós-graduação' },
-    { id: 7, descricao: 'mestrado' }
-  ]
-
-  nivelHabilidadeList: any = [
-    { id: 1, nivel: 'iniciante' },
-    { id: 2, nivel: 'intermediário' },
-    { id: 3, nivel: 'avançado' },
+    { id: 0, descricao: 'curso' },
+    { id: 1, descricao: 'certificação' },
+    { id: 2, descricao: 'profissionalizante' },
+    { id: 3, descricao: 'técnico' },
+    { id: 4, descricao: 'graduação' },
+    { id: 5, descricao: 'pós-graduação' },
+    { id: 6, descricao: 'mestrado' }
   ]
 
   constructor(
@@ -76,7 +70,7 @@ export class RelatorioComponent implements OnInit {
         dtInicio: new Date('02/02/2015'),
         dtFim: new Date('08/10/2018'),
         tipo: {
-          id: 5,
+          id: 4,
           descricao: 'Graduação'
         }
       }
@@ -86,7 +80,7 @@ export class RelatorioComponent implements OnInit {
         id: 1,
         descricao: 'JavaScript',
         nivelHabilidade: {
-          id: 2,
+          id: 1,
           nivel: 'Intermediário'
         }
       },
@@ -94,7 +88,7 @@ export class RelatorioComponent implements OnInit {
         id: 2,
         descricao: 'Java',
         nivelHabilidade: {
-          id: 2,
+          id: 1,
           nivel: 'Intermediário'
         }
       },
@@ -102,7 +96,7 @@ export class RelatorioComponent implements OnInit {
         id: 3,
         descricao: 'Angular',
         nivelHabilidade: {
-          id: 2,
+          id: 1,
           nivel: 'Intermediário'
         }
       }
@@ -150,6 +144,8 @@ export class RelatorioComponent implements OnInit {
   //Starta valores iniciais do form baseado no objeto recebido do service
   ngOnInit(): void {
     this.startFormValues();
+
+    this.curriculumForm.valueChanges.subscribe(form => console.log(form));
   }
 
   //Método de submit do relatório
@@ -208,7 +204,7 @@ export class RelatorioComponent implements OnInit {
       })
     });
   }
-
+  
   newCurso(): FormGroup {
     return this.formBuilder.group({
       id: new FormControl(),
@@ -262,10 +258,6 @@ export class RelatorioComponent implements OnInit {
   }
 
   //Delete FormGroups of FormArrays
-  deleteHabilidade(habilidadeIndex: number) {
-    this.habilidades.removeAt(habilidadeIndex);
-  }
-
   deleteCurso(cursoIndex: number) {
     this.cursos.removeAt(cursoIndex);
   }

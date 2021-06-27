@@ -15,7 +15,6 @@ import { RelatorioComponent } from './components/relatorio/relatorio.component';
 import { PessoaService } from './service/pessoa.service';
 import { HabilidadesComponent } from './components/relatorio/habilidades/habilidades.component';
 
-
 const maskConfig: Partial<IConfig> = {
   validation: false,
 };
