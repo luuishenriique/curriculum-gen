@@ -1,5 +1,6 @@
 export interface RedeSocial{
-    id:any;
-    nome:any;
-    link:any;
+    id?: number;
+    pessoaId?: number;
+    nome?: string;
+    link?: string;
 }

@@ -1,8 +1,8 @@
 import { NivelHabilidade } from "./nivel-habilidade.model";
 
 export interface Habilidade{
-    id: number;
-    nome:string;
-    nivel:NivelHabilidade;
-    isExperiente:boolean;
+    id?: number;
+    pessoaId?: number;
+    descricao?: string;
+    nivelHabilidade?: NivelHabilidade;
 }

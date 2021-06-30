@@ -1,4 +1,4 @@
 export interface NivelHabilidade{
-    id: number;
-    nivel:string;
+    id?: number;
+    nivel?:string;
 }

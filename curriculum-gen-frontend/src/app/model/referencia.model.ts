@@ -1,9 +1,7 @@
 export interface Referencia{
-    id: number;
-    nome: string;
-    dtNasc: Date;
-    email: string;
-    ddd: string;
-    celular: string;
-    telefone: string;
+    id?: number;
+    nome?: string;
+    email?: string;
+    celular?: string;
+    telefone?: string;
 }
