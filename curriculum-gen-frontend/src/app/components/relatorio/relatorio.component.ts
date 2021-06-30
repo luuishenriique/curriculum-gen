@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormControl, FormControlName, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { PessoaService } from 'src/app/service/pessoa.service';
 
 @Component({
@@ -8,22 +8,6 @@ import { PessoaService } from 'src/app/service/pessoa.service';
   styleUrls: ['./relatorio.component.scss']
 })
 export class RelatorioComponent implements OnInit {
-
-  tipoList: any = [
-    { id: 1, descricao: 'curso' },
-    { id: 2, descricao: 'certificação' },
-    { id: 3, descricao: 'profissionalizante' },
-    { id: 4, descricao: 'técnico' },
-    { id: 5, descricao: 'graduação' },
-    { id: 6, descricao: 'pós-graduação' },
-    { id: 7, descricao: 'mestrado' }
-  ]
-
-  nivelHabilidadeList: any = [
-    { id: 1, nivel: 'iniciante' },
-    { id: 2, nivel: 'intermediário' },
-    { id: 3, nivel: 'avançado' },
-  ]
 
   constructor(
     private pessoaService: PessoaService,
@@ -76,7 +60,7 @@ export class RelatorioComponent implements OnInit {
         dtInicio: new Date('02/02/2015'),
         dtFim: new Date('08/10/2018'),
         tipo: {
-          id: 5,
+          id: 4,
           descricao: 'Graduação'
         }
       }
@@ -86,7 +70,7 @@ export class RelatorioComponent implements OnInit {
         id: 1,
         descricao: 'JavaScript',
         nivelHabilidade: {
-          id: 2,
+          id: 1,
           nivel: 'Intermediário'
         }
       },
@@ -94,7 +78,7 @@ export class RelatorioComponent implements OnInit {
         id: 2,
         descricao: 'Java',
         nivelHabilidade: {
-          id: 2,
+          id: 1,
           nivel: 'Intermediário'
         }
       },
@@ -102,7 +86,7 @@ export class RelatorioComponent implements OnInit {
         id: 3,
         descricao: 'Angular',
         nivelHabilidade: {
-          id: 2,
+          id: 1,
           nivel: 'Intermediário'
         }
       }
@@ -130,19 +114,6 @@ export class RelatorioComponent implements OnInit {
     habilidades: this.formBuilder.array([])
   });
 
-  //Criar Gets dos FormArrays
-  get habilidades(): FormArray {
-    return this.curriculumForm.get('habilidades') as FormArray;
-  }
-
-  get cursos(): FormArray {
-    return this.curriculumForm.get('cursos') as FormArray;
-  }
-
-  get empregos(): FormArray {
-    return this.curriculumForm.get('empregos') as FormArray;
-  }
-
   get redesSociais(): FormArray {
     return this.curriculumForm.get('redesSociais') as FormArray;
   }
@@ -152,43 +123,14 @@ export class RelatorioComponent implements OnInit {
     this.startFormValues();
   }
 
-  //Método de submit do relatório
-  onSubmit(teste: any): void {
-    console.log(this.curriculumForm);
-  }
-
   //Prepara os componentes e recebe valores do objeto
   private startFormValues(): void {
-    this.setHabilidade();
-    this.setCurso();
-    this.setEmprego();
     this.setRedeSocial();
     this.curriculumForm.patchValue(this.pessoa);
   }
 
-  private setHabilidade() {
-    const qtd = this.pessoa.habilidades.length;
-
-    for (let i = 0; i < qtd; i++) {
-      this.addHabilidade();
-    }
-  }
-
-  private setCurso() {
-    const qtd = this.pessoa.cursos.length;
-
-    for (let i = 0; i < qtd; i++) {
-      this.addCurso();
-    }
-  }
-
-  private setEmprego(){
-    const qtd = this.pessoa.empregos.length;
-
-    for(let i = 0; i < qtd; i++){
-      this.addEmprego();
-    }
-  }
+  //Método de submit do relatório
+  onSubmit(teste: any): void {}
 
   private setRedeSocial(){
     const qtd = this.pessoa.redesSociais.length;
@@ -198,46 +140,6 @@ export class RelatorioComponent implements OnInit {
     }
   }
 
-  //Cria FormGroups no FormArrays
-  newHabilidade(): FormGroup {
-    return this.formBuilder.group({
-      descricao: new FormControl(),
-      nivelHabilidade: this.formBuilder.group({
-        id: new FormControl(),
-        nivel: new FormControl()
-      })
-    });
-  }
-
-  newCurso(): FormGroup {
-    return this.formBuilder.group({
-      id: new FormControl(),
-      instituicao: new FormControl(),
-      curso: new FormControl(),
-      dtInicio: new FormControl(),
-      dtFim: new FormControl(),
-      tipo: this.formBuilder.group({
-        id: new FormControl(),
-        descricao: new FormControl(),
-      })
-    });
-  }
-
-  newEmprego(): FormGroup{
-    return this.formBuilder.group({
-      empresa: new FormControl(),
-      cargo: new FormControl(),
-      dtInicio: new FormControl(),
-      dtFim: new FormControl(),
-
-      referencia: this.formBuilder.group({
-        nome: new FormControl(),
-        email: new FormControl(),
-        celular: new FormControl(),
-      })
-    });
-  }
-
   newRedeSocial(): FormGroup{
     return this.formBuilder.group({
       nome: new FormControl(),
@@ -245,33 +147,8 @@ export class RelatorioComponent implements OnInit {
     });
   }
 
-  addHabilidade() {
-    this.habilidades.push(this.newHabilidade());
-  }
-
-  addCurso() {
-    this.cursos.push(this.newCurso());
-  }
-
-  addEmprego(){
-    this.empregos.push(this.newEmprego());
-  }
-
   addRedeSocial(){
     this.redesSociais.push(this.newRedeSocial());
-  }
-
-  //Delete FormGroups of FormArrays
-  deleteHabilidade(habilidadeIndex: number) {
-    this.habilidades.removeAt(habilidadeIndex);
-  }
-
-  deleteCurso(cursoIndex: number) {
-    this.cursos.removeAt(cursoIndex);
-  }
-
-  deleteEmprego(empregoIndex: number){
-    this.empregos.removeAt(empregoIndex);
   }
 
   deleteRedeSocial(redeSocialIndex: number){

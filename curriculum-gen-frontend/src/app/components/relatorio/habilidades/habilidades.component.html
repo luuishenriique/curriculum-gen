@@ -1,0 +1,31 @@
+<form [formGroup]="curriculumForm">
+    <div formArrayName="habilidades" class="lista">
+
+        <div *ngFor="let habilidadeForm of habilidades.controls; let i = index" class="lista">
+            
+            <fieldset [formGroupName]="i">
+                <mat-form-field>
+                    <mat-label>Habilidade</mat-label>
+                    <input matInput type="text" placeholder="Conhecimento" formControlName="descricao">
+                </mat-form-field>
+
+                <mat-form-field formGroupName="nivelHabilidade" class="campo">
+                    <mat-label>Nível</mat-label>
+                    <mat-select formControlName="id" (selectionChange)="selectNivelHabilidade($event, i)">
+                        <mat-option *ngFor="let nivelHabilidade of nivelHabilidadeList"
+                            [value]="nivelHabilidade.id">
+                            {{nivelHabilidade.nivel}}
+                        </mat-option>
+        
+                    </mat-select>
+                </mat-form-field>
+                <mat-icon class="delete-btn" (click)="deleteHabilidade(i)">
+                    delete_forever
+                </mat-icon>
+            </fieldset>
+        </div>
+        <button mat-mini-fab (click)="addHabilidade()">
+            <mat-icon class="add-course-btn">add</mat-icon>
+        </button>
+    </div>
+</form>

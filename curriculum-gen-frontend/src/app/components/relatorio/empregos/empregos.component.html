@@ -1,0 +1,47 @@
+<form [formGroup]="curriculumForm">
+    <div formArrayName="empregos" class="lista">
+        <div *ngFor="let emprego of empregos.controls; let i = index;" class="lista">
+            <fieldset [formGroupName]="i">
+                <mat-form-field class="campo">
+                    <mat-label>Empresa</mat-label>
+                    <input matInput type="text" placeholder="Empresa que trabalhou" formControlName="empresa">
+                </mat-form-field>
+                <mat-form-field class="campo">
+                    <mat-label>Cargo</mat-label>
+                    <input matInput type="text" placeholder="Cargo ocupado" formControlName="cargo">
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Selecione o período de trabalho</mat-label>
+                    <mat-date-range-input [rangePicker]="picker1">
+                        <input matStartDate formControlName="dtInicio" [disabled]="true" placeholder="Data de início">
+                        <input matEndDate formControlName="dtFim" [disabled]="true" placeholder="Data de fim">
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-date-range-picker #picker1 disabled="false"></mat-date-range-picker>
+                </mat-form-field>
+    
+                <fieldset formGroupName="referencia">
+                    <mat-form-field class="campo">
+                        <mat-label>Referência</mat-label>
+                        <input matInput type="text" placeholder="Nome da pessoa" formControlName="nome">
+                    </mat-form-field>
+                    <mat-form-field class="campo">
+                        <mat-label>Email</mat-label>
+                        <input matInput type="text" placeholder="Email da pessoa" formControlName="email">
+                    </mat-form-field>
+                    <mat-form-field class="campo">
+                        <mat-label>Celular</mat-label>
+                        <input matInput type="text" mask="(00) 0 0000-0000" placeholder="Telefone de contato"
+                            formControlName="celular">
+                    </mat-form-field>
+                </fieldset>
+                <mat-icon class="delete-btn" (click)="deleteEmprego(i)">
+                    delete_forever
+                </mat-icon>
+            </fieldset>
+        </div>
+        <button mat-mini-fab (click)="addEmprego()">
+            <mat-icon class="add-course-btn">add</mat-icon>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,17 @@
+.campo {
+    width: 45%;
+}
+
+.lista{
+    display: flex;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+fieldset{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 100%;
+}
