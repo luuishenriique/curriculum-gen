@@ -123,10 +123,6 @@ export class RelatorioComponent implements OnInit {
     return this.curriculumForm.get('cursos') as FormArray;
   }
 
-  get empregos(): FormArray {
-    return this.curriculumForm.get('empregos') as FormArray;
-  }
-
   get redesSociais(): FormArray {
     return this.curriculumForm.get('redesSociais') as FormArray;
   }
@@ -142,7 +138,6 @@ export class RelatorioComponent implements OnInit {
   //Prepara os componentes e recebe valores do objeto
   private startFormValues(): void {
     this.setHabilidade();
-    this.setCurso();
     this.setRedeSocial();
     this.curriculumForm.patchValue(this.pessoa);
   }
@@ -155,14 +150,6 @@ export class RelatorioComponent implements OnInit {
 
     for (let i = 0; i < qtd; i++) {
       this.addHabilidade();
-    }
-  }
-
-  private setCurso() {
-    const qtd = this.pessoa.cursos.length;
-
-    for (let i = 0; i < qtd; i++) {
-      this.addCurso();
     }
   }
 
@@ -184,20 +171,6 @@ export class RelatorioComponent implements OnInit {
       })
     });
   }
-  
-  newCurso(): FormGroup {
-    return this.formBuilder.group({
-      id: new FormControl(),
-      instituicao: new FormControl(),
-      curso: new FormControl(),
-      dtInicio: new FormControl(),
-      dtFim: new FormControl(),
-      tipo: this.formBuilder.group({
-        id: new FormControl(),
-        descricao: new FormControl()
-      })
-    });
-  }
 
   newRedeSocial(): FormGroup{
     return this.formBuilder.group({
@@ -208,10 +181,6 @@ export class RelatorioComponent implements OnInit {
 
   addHabilidade() {
     this.habilidades.push(this.newHabilidade());
-  }
-
-  addCurso() {
-    this.cursos.push(this.newCurso());
   }
 
   addRedeSocial(){

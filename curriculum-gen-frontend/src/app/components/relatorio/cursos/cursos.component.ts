@@ -20,16 +20,29 @@ export class CursosComponent implements OnInit {
   ];
 
   @Input() curriculumForm: FormGroup;
+  @Input() listaCurso: Array<any>;
 
   constructor(private formBuilder: FormBuilder) {
     this.curriculumForm = this.formBuilder.group({});
+    this.listaCurso = new Array<any>();
   }
 
   get cursos(): FormArray {
     return this.curriculumForm.controls['cursos'] as FormArray;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.setCurso();
+    this.cursos.patchValue(this.listaCurso);
+  }
+
+  private setCurso() {
+    const qtd = this.listaCurso.length;
+
+    for (let i = 0; i < qtd; i++) {
+      this.addCurso();
+    }
+  }
 
   newCurso(): FormGroup {
     return this.formBuilder.group({
