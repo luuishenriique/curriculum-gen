@@ -143,7 +143,6 @@ export class RelatorioComponent implements OnInit {
   private startFormValues(): void {
     this.setHabilidade();
     this.setCurso();
-    this.setEmprego();
     this.setRedeSocial();
     this.curriculumForm.patchValue(this.pessoa);
   }
@@ -164,14 +163,6 @@ export class RelatorioComponent implements OnInit {
 
     for (let i = 0; i < qtd; i++) {
       this.addCurso();
-    }
-  }
-
-  private setEmprego(){
-    const qtd = this.pessoa.empregos.length;
-
-    for(let i = 0; i < qtd; i++){
-      this.addEmprego();
     }
   }
 
@@ -208,21 +199,6 @@ export class RelatorioComponent implements OnInit {
     });
   }
 
-  newEmprego(): FormGroup{
-    return this.formBuilder.group({
-      empresa: new FormControl(),
-      cargo: new FormControl(),
-      dtInicio: new FormControl(),
-      dtFim: new FormControl(),
-
-      referencia: this.formBuilder.group({
-        nome: new FormControl(),
-        email: new FormControl(),
-        celular: new FormControl(),
-      })
-    });
-  }
-
   newRedeSocial(): FormGroup{
     return this.formBuilder.group({
       nome: new FormControl(),
@@ -238,16 +214,8 @@ export class RelatorioComponent implements OnInit {
     this.cursos.push(this.newCurso());
   }
 
-  addEmprego(){
-    this.empregos.push(this.newEmprego());
-  }
-
   addRedeSocial(){
     this.redesSociais.push(this.newRedeSocial());
-  }
-
-  deleteEmprego(empregoIndex: number){
-    this.empregos.removeAt(empregoIndex);
   }
 
   deleteRedeSocial(redeSocialIndex: number){
