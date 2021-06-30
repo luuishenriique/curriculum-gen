@@ -15,16 +15,29 @@ export class HabilidadesComponent implements OnInit {
   ]
 
   @Input() curriculumForm: FormGroup;
+  @Input() listaHabilidade: Array<any>;
 
   constructor(private formBuilder: FormBuilder) { 
     this.curriculumForm = this.formBuilder.group({});
+    this.listaHabilidade = new Array<any>();
   }
 
   get habilidades(): FormArray {
     return this.curriculumForm.controls['habilidades'] as FormArray;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.setHabilidade();
+    this.habilidades.patchValue(this.listaHabilidade);
+  }
+
+  private setHabilidade() {
+    const qtd = this.listaHabilidade.length;
+
+    for (let i = 0; i < qtd; i++) {
+      this.addHabilidade();
+    }
+  }
 
   newHabilidade(): FormGroup {
     return this.formBuilder.group({

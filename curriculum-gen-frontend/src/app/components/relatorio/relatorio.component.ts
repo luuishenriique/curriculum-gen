@@ -114,15 +114,6 @@ export class RelatorioComponent implements OnInit {
     habilidades: this.formBuilder.array([])
   });
 
-  //Criar Gets dos FormArrays
-  get habilidades(): FormArray {
-    return this.curriculumForm.get('habilidades') as FormArray;
-  }
-
-  get cursos(): FormArray {
-    return this.curriculumForm.get('cursos') as FormArray;
-  }
-
   get redesSociais(): FormArray {
     return this.curriculumForm.get('redesSociais') as FormArray;
   }
@@ -130,28 +121,16 @@ export class RelatorioComponent implements OnInit {
   //Starta valores iniciais do form baseado no objeto recebido do service
   ngOnInit(): void {
     this.startFormValues();
-
-    //Sempre que o valor do form mudar printa o form
-    this.curriculumForm.valueChanges.subscribe(form => console.log(form));
   }
 
   //Prepara os componentes e recebe valores do objeto
   private startFormValues(): void {
-    this.setHabilidade();
     this.setRedeSocial();
     this.curriculumForm.patchValue(this.pessoa);
   }
 
   //Método de submit do relatório
   onSubmit(teste: any): void {}
-
-  private setHabilidade() {
-    const qtd = this.pessoa.habilidades.length;
-
-    for (let i = 0; i < qtd; i++) {
-      this.addHabilidade();
-    }
-  }
 
   private setRedeSocial(){
     const qtd = this.pessoa.redesSociais.length;
@@ -161,26 +140,11 @@ export class RelatorioComponent implements OnInit {
     }
   }
 
-  //Cria FormGroups no FormArrays
-  newHabilidade(): FormGroup {
-    return this.formBuilder.group({
-      descricao: new FormControl(),
-      nivelHabilidade: this.formBuilder.group({
-        id: new FormControl(),
-        nivel: new FormControl()
-      })
-    });
-  }
-
   newRedeSocial(): FormGroup{
     return this.formBuilder.group({
       nome: new FormControl(),
       link: new FormControl(),
     });
-  }
-
-  addHabilidade() {
-    this.habilidades.push(this.newHabilidade());
   }
 
   addRedeSocial(){
