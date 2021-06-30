@@ -1,6 +1,7 @@
 import { Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Curso } from 'src/app/model/curso.model';
 
 @Component({
   selector: 'app-cursos',
@@ -20,7 +21,7 @@ export class CursosComponent implements OnInit {
   ];
 
   @Input() curriculumForm: FormGroup;
-  @Input() listaCurso: Array<any>;
+  @Input() listaCurso: Array<Curso> | undefined;
 
   constructor(private formBuilder: FormBuilder) {
     this.curriculumForm = this.formBuilder.group({});
@@ -33,14 +34,18 @@ export class CursosComponent implements OnInit {
 
   ngOnInit(): void {
     this.setCurso();
-    this.cursos.patchValue(this.listaCurso);
+    if(this.listaCurso){
+      this.cursos.patchValue(this.listaCurso);
+    }
   }
 
   private setCurso() {
-    const qtd = this.listaCurso.length;
+    if(this.listaCurso){
+      const qtd = this.listaCurso.length ? this.listaCurso.length : 0;
 
-    for (let i = 0; i < qtd; i++) {
-      this.addCurso();
+      for (let i = 0; i < qtd; i++) {
+        this.addCurso();
+      }
     }
   }
 

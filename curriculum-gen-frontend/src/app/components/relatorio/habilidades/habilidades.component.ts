@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Habilidade } from 'src/app/model/habilidade.model';
 
 @Component({
   selector: 'app-habilidades',
@@ -15,11 +16,11 @@ export class HabilidadesComponent implements OnInit {
   ]
 
   @Input() curriculumForm: FormGroup;
-  @Input() listaHabilidade: Array<any>;
+  @Input() listaHabilidade: Array<Habilidade> | undefined;
 
   constructor(private formBuilder: FormBuilder) { 
     this.curriculumForm = this.formBuilder.group({});
-    this.listaHabilidade = new Array<any>();
+    this.listaHabilidade = new Array<Habilidade>();
   }
 
   get habilidades(): FormArray {
@@ -28,14 +29,18 @@ export class HabilidadesComponent implements OnInit {
 
   ngOnInit(): void {
     this.setHabilidade();
-    this.habilidades.patchValue(this.listaHabilidade);
+    if(this.listaHabilidade){
+      this.habilidades.patchValue(this.listaHabilidade);
+    }
   }
 
   private setHabilidade() {
-    const qtd = this.listaHabilidade.length;
+    if(this.listaHabilidade){
+      const qtd = this.listaHabilidade.length ? this.listaHabilidade.length : 0;
 
-    for (let i = 0; i < qtd; i++) {
-      this.addHabilidade();
+      for (let i = 0; i < qtd; i++) {
+        this.addHabilidade();
+      }
     }
   }
 

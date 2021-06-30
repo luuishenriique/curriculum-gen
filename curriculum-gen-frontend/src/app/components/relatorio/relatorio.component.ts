@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Pessoa } from 'src/app/model/pessoa.model';
 import { PessoaService } from 'src/app/service/pessoa.service';
 
 @Component({
@@ -14,7 +15,8 @@ export class RelatorioComponent implements OnInit {
     private formBuilder: FormBuilder,
   ) { }
 
-  pessoa = {
+  pessoa: Pessoa = this.pessoaService.getPessoaById();
+  /* {
     id: 1,
     nome: 'Henrique Martins',
     dtNasc: new Date('07/09/1989'),
@@ -91,7 +93,7 @@ export class RelatorioComponent implements OnInit {
         }
       }
     ]
-  }
+  } */
 
   public curriculumForm: FormGroup = this.formBuilder.group({
     nome: new FormControl(),
@@ -133,7 +135,7 @@ export class RelatorioComponent implements OnInit {
   onSubmit(teste: any): void {}
 
   private setRedeSocial(){
-    const qtd = this.pessoa.redesSociais.length;
+    const qtd = this.pessoa.redesSociais?.length ? this.pessoa.redesSociais?.length : 0;
 
     for(let i = 0; i < qtd; i++){
       this.addRedeSocial();

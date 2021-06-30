@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Emprego } from 'src/app/model/emprego.model';
 
 @Component({
   selector: 'app-empregos',
@@ -9,7 +10,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 export class EmpregosComponent implements OnInit {
 
   @Input() curriculumForm: FormGroup;
-  @Input() listaEmprego: Array<any>;
+  @Input() listaEmprego: Array<Emprego> | undefined;
 
   constructor(private formBuilder: FormBuilder) {
     this.curriculumForm = formBuilder.group({});
@@ -18,7 +19,10 @@ export class EmpregosComponent implements OnInit {
 
   ngOnInit(): void {
     this.setEmprego();
-    this.empregos.patchValue(this.listaEmprego);
+    if (this.listaEmprego){
+      this.empregos.patchValue(this.listaEmprego);
+    }
+    
   }
 
   get empregos(): FormArray { 
@@ -26,10 +30,12 @@ export class EmpregosComponent implements OnInit {
   }
 
   private setEmprego(){
-    const qtd = this.listaEmprego.length;
+    if(this.listaEmprego){
+      const qtd = this.listaEmprego.length ? this.listaEmprego.length : 0;
 
-    for(let i = 0; i < qtd; i++){
-      this.addEmprego();
+      for(let i = 0; i < qtd; i++){
+        this.addEmprego();
+      }
     }
   }
 
